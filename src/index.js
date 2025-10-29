@@ -2,8 +2,21 @@ import React from 'react'
 import  {createRoot} from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
+import Pedido from './Pedido'
+import Cartao from './Cartao'
+import Feedback from './Feedback'
+
 
 const App = () => {
+
+    // instruções para App não de interface ( de interface deve estar dentro de return), para o componente Feedback
+    const textoOK = "Já chegou"
+    const textoNOK = "Ainda não chegou"
+    const funcaoOK = () => alert ("Agradecemos a confirmação!") // alerta na tela, funcao de callback () mesmo que nao tenha parâmetro, e depois a arrow function 
+    // funcao alert ja vem do java script 
+    const funcaoNOK = () => alert ("Verificaremos o ocorrido!")
+const componenteFeedback = <Feedback textoOK={textoOK} funcaoOK={funcaoOK} textoNOK={textoNOK} funcaoNOK={funcaoNOK}/>; // guarda as instancias do feedback
+
     // JSX = Syntax sugar para escrever código JavaScript bruto, tradutor babel
     return (
         // container principal
@@ -21,75 +34,42 @@ const App = () => {
 
                 {/* linha para o primeiro pedido pedido*/}
                 <div className="row">
+                
                     {/* controle de colunas para responsividade*/}
                     {/*sm é aproximadamente 570px de largura, então se a tela for menor que isso, a coluna ocupará toda a largura disponível, se chegou ocupa 8 espaços (col-sm-8)*/}
                     {/*md é aproximadamente 720px de largura, então se a tela for menor que isso, a coluna ocupará toda a largura disponível, se chegou ocupa 6 espaços (col-md-6)*/}
                     <div className="col-sm-8 col-md-6 m-2">
-                        <div className="card">
-                            {/* cabeçalho do cartão */}
-                            <div className="card-header text-muted">22/04/2021</div>
-                                {/* corpo do cartão */}
-                                <div className="card-body d-flex">
-                                    {/*d-flex: agrupar de forma dinamica os itens dentro do container*/}
-                                    <div className="d-flex align-items-center">
-                                        {/* ícone do produto: fas usando o font awesome, fa-hdd qual icone quer usar */}
-                                        <i className="fas fa-hdd fa-2x"></i>
-                                    </div>
-                                    {/* flex-grow 1: tomar espaço remanescente */}
-                                    <div className="flex-grow-1 ms-2 border">
-                                        <h4 className="text-center">SSD</h4>
-                                        <p className="text-center">SSD Kingston A400 - SATA</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <Cartao cabecalho="22/04/2021">
+                        <Pedido icone="fas fa-hdd fa-2x" titulo="SSD" descricao="SSD Kingston A400 - SATA"/>
+                        {componenteFeedback}
+                    </Cartao>
                     </div>
                 </div>
+            
                 {/* linha para o segundo pedido pedido*/}
                 <div className="row">
                     {/* controle de colunas para responsividade*/}
                     <div className="col-sm-8 col-md-6 m-2">
-                        {/* cartão */}
-                        <div className="card">
-                            {/* cabeçalho do cartão */}
-                            <div className="card-header text-muted">20/04/2021</div>
-                            {/* corpo do cartão */}
-                            <div className="card-body d-flex">
-                                <div className="d-flex align-items-center">
-                                    <i className="fas fa-book fa-2x"></i>
-                                </div>
-                                {/* flex-grow 1: tomar espaço remanescente */}
-                                <div className="flex-grow-1 ms-2 border">
-                                    <h4 className="text-center">Livro</h4>
-                                    <p className="text-center">Concrete Mathematics - Donald Knuth</p>
-                                </div>
-                            </div>
-                        </div>
+                        {/* cabeçalho do cartão */}
+                        <Cartao cabecalho="20/04/2021">
+                            <Pedido icone="fas fa-book fa-2x" titulo="Livro" descricao="Concrete Mathematics - Donald Knuth" />
+                        </Cartao>
+                        {componenteFeedback}
                     </div>
                 </div>
-
                 <div className="row">
                     {/* controle de colunas para responsividade*/}
                     <div className="col-sm-8 col-md-6 m-2">
                         {/* cartão */}
-                        <div className="card">
-                            {/* cabeçalho do cartão */}
-                            <div className="card-header text-muted">25/12/2021</div>
-                            {/* corpo do cartão */}
-                            <div className="card-body d-flex">
-                                <div className="d-flex align-items-center">
-                                    <i className="fas fa-laptop fa-2x"></i>
-                                </div>
-                                {/* flex-grow 1: tomar espaço remanescente */}
-                                <div className="flex-grow-1 ms-2 border">
-                                    <h4 className="text-center">Notebook</h4>
-                                    <p className="text-center">Dell Inspiron 15 - 8GB RAM</p>
-                                </div>
-                            </div>
-                        </div>
+                        <Cartao cabecalho="21/01/2021">
+                            <Pedido icone="fas fa-laptop fa-2x" titulo="Notebook"
+                                descricao="Notebook Dell Inspiron 15 - 8GB RAM" />
+                        </Cartao>
+                        {componenteFeedback}
                     </div>
                 </div>
             </div> 
+        </div>
     );
 }
 
